@@ -1210,13 +1210,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 456041112}
-    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 456041111}
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 456041110}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 456041112}
   m_SourcePrefab: {fileID: 100100000, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
 --- !u!1 &456041109 stripped
 GameObject:
@@ -1277,22 +1277,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 456041109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09876793f3551764f965fe2878d99845, type: 3}
+  m_Script: {fileID: 11500000, guid: b148b676ff4bc2e4b8f84c6aefca7435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
+  _agent: {fileID: 0}
+  _animator: {fileID: 0}
   _player: {fileID: 0}
-  _agent: {fileID: 456041111}
-  _patrolArea: {fileID: 1863295150}
-  _patrollingLocations: []
-  _index: 0
-  _lastLocation: 0
-  HQ: {fileID: 1876921144}
-  _distanceToChase: 10
-  _fieldOfView: 0.28
-  _distanceToAttack: 3
-  _isInFront: 0
-  _restTime: 0
+  _patrolPoints:
+  - {fileID: 1653981927}
+  - {fileID: 272130473}
+  - {fileID: 1356648132}
+  - {fileID: 178998797}
+  - {fileID: 82757175}
+  - {fileID: 493595111}
+  - {fileID: 1070382112}
 --- !u!1 &493595111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,12 +2092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67a20335d307a044a094b6930982787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camSensitivity: 10
-  _playerBody: {fileID: 255898506}
-  _lookInput: {x: 0, y: 0}
-  _xRotation: 0
-  _xLookInput: 0
-  _yLookInput: 0
 --- !u!114 &1989242826
 MonoBehaviour:
   m_ObjectHideFlags: 0
