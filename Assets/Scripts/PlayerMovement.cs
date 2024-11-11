@@ -1,11 +1,11 @@
 
-using KBCore.Refs;
+//using KBCore.Refs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : ValidatedMonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _walkSpeed;
@@ -23,12 +23,12 @@ public class PlayerMovement : ValidatedMonoBehaviour
     private Camera _mainCamera;
     private Vector3 _currentMov = Vector3.zero;
 
-    private CharacterController _characterController;
+   [SerializeField] private CharacterController _characterController;
 
     private PlayerInputs _playerInputs;
     [Header("New Input Action")]
     [SerializeField] private Vector2 _moveInput, _lookInput;
-    [SerializeField] private bool _isJumpPresded, _isSprintPressed;
+    [SerializeField] private bool _isJumpPressed, _isSprintPressed;
 
     private void Awake()
     {
@@ -39,14 +39,15 @@ public class PlayerMovement : ValidatedMonoBehaviour
 
         _playerInputs.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
         _playerInputs.Player.Move.canceled += _ => _moveInput = Vector2.zero;
-
+        
         _playerInputs.Player.Look.performed += ctx => _lookInput = ctx.ReadValue<Vector2>();
         _playerInputs.Player.Look.canceled += _ => _lookInput = Vector2.zero;
 
-        
         _playerInputs.Player.Jump.started += Jump;
-        _playerInputs.Player.Jump.canceled += Sprint;
+        _playerInputs.Player.Jump.canceled += Jump;
 
+        _playerInputs.Player.Run.started += Sprint;
+        _playerInputs.Player.Run.canceled += Sprint;
     }
 
     private void Update()
@@ -80,10 +81,15 @@ public class PlayerMovement : ValidatedMonoBehaviour
     {
         if(_characterController.isGrounded)
         {
+            Debug.Log($"{_characterController.isGrounded}");
             _currentMov.y = -0.05f;
+             if (_isJumpPressed)
+            {
+                _currentMov.y  = _jumpForce;
+            }
         }
         else{
-            _currentMov.y = _gravity * Time.deltaTime;
+            _currentMov.y -= _gravity * Time.deltaTime;
         }
     }
 
@@ -99,7 +105,7 @@ public class PlayerMovement : ValidatedMonoBehaviour
 
     private void Jump(InputAction.CallbackContext ctx)
     {
-        _isJumpPresded = ctx.ReadValueAsButton();
+        _isJumpPressed = ctx.ReadValueAsButton();
     }
     private void Sprint(InputAction.CallbackContext ctx)
     {
